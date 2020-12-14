@@ -6,11 +6,7 @@
         <groupId>com.de</groupId>
         <artifactId>spring-cloud-demo</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <!--没有relativePath标签时，
-            没有从当前pom文件的上一级目录找，
-            子模块继承不到父模块中dependencyManagement中包的version信息
-            *********项目打包报错***********-->
-        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <artifactId>zuul-server-demo</artifactId>

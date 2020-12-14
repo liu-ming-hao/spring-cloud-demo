@@ -7,13 +7,56 @@
     <groupId>com.de</groupId>
     <artifactId>spring-cloud-demo</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-    <!--<dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.10</version>
-        </dependency>
-    </dependencies>-->
+    <name>com/de</name>
+    <description>spring cloud demo project by liuminghao</description>
+
+    <!--子模块-->
+    <modules>
+        <!--cloud组件服务-->
+        <module>eureka-server-demo</module><!--注册中心-->
+        <module>zuul-server-demo</module><!--网关-->
+        <module>config-server-demo</module><!--配置中心-->
+        <module>stream-server-demo</module><!--消息通道 MQ-->
+        <!--接口汇总 路由-->
+        <module>consumer-server-demo</module><!--消费者 服务-->
+        <!--核心业务-->
+        <module>provider-server-demo</module><!--生产者 服务集群1-->
+        <module>provider-server-demo-two</module><!--生产者 服务集群2-->
+        <!--基础业务-->
+        <!--公共依赖包-->
+    </modules>
+
+    <!--版本号配置-->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
+        <lombok.version>1.16.10</lombok.version>
+        <swagger2.varsion>2.9.2</swagger2.varsion>
+    </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.12.RELEASE</version>
+    </parent>
+
+    <!--继承自该项目的所有子项目的默认依赖信息。
+            这部分的依赖信息不会被立即解析,而是当子项目声明一个依赖（必须描述group ID和 artifact ID信息），
+                如果group ID和artifact ID以外的一些信息没有描述，则通过group ID和artifact ID 匹配到这里的依赖，并使用这里的依赖信息。-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

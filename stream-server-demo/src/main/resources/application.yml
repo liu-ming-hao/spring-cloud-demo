@@ -1,0 +1,26 @@
+server:
+  port: 8767
+spring:
+  application:
+    name: stream-server-demo
+  cloud:
+    stream: # 消息驱动
+      binders:
+        defaultRabbit:
+          type: rabbit
+          environment: #配置rabbimq连接环境
+            spring:
+              rabbitmq:
+                host: 192.168.85.47
+                username: admin
+                password: password
+                virtual-host: /
+      bindings:
+        #output:  stream 默认通道
+        myOutput:       #指定输入通道对应的主题名
+          destination: stream-demo2       #exchange名称，交换模式默认是topic
+          content-type: text/plain       #消息发送的格式，接收端不用指定格式，但是发送端要
+eureka:
+  client:
+    serviceUrl:
+      defaultZone:  http://localhost:8761/eureka/

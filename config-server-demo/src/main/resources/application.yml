@@ -1,0 +1,37 @@
+server:
+  port: 8762
+spring:
+  application:
+    name: config-server-demo
+  config:
+    name: config-server-demo
+  #profiles:
+    #active: subversion #从svn上读取时必加
+    #active: native  从本地读取文件  放开此处
+  #从git 拉取文件
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/liu-ming-hao/configdemo.git  #配置文件所在仓库
+          ###如果Git仓库为公开仓库，可以不填写用户名和密码，如果是私有仓库需要填写。
+          #username: your_username  # 登录账号
+          #password: your_password  #登录密码
+          default-label: master  #配置文件分支
+          search-paths: configdemo   #配置文件所在根目录
+  rabbitmq:
+    host: 192.168.85.47
+    username: admin
+    password:  password
+    port: 5672
+    publisher-confirms: true
+#暴露消息总线的地址，暴露/actuator/bus-refresh
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: bus-refresh  # 固定写法
+eureka:
+  client:
+    serviceUrl:
+     defaultZone: http://localhost:8761/eureka/ #注册中心地址

@@ -1,0 +1,33 @@
+server:
+  port: 8764
+spring:
+  application:
+    name: consumer-service-demo #服务名
+  zipkin: #链路跟踪
+    base-url: http://localhost:9411
+    # 关闭服务发现，否则Spring Cloud会把zipkin的url当做服务名称
+    discoveryClientEnabled: false
+    sender:  # 该参数保证 zipkin显示服务
+      type: web  # 设置使用http的方式传输数据
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      percentage: 1.0 # 设置zipkin采样比例  默认0.1
+  cloud:
+    stream: # 消息驱动
+      binders:
+        defaultRabbit:
+          type: rabbit
+          environment: #配置rabbimq连接环境
+            spring:
+              rabbitmq:
+                host: 192.168.85.47
+                username: admin
+                password: password
+                virtual-host: /
+      bindings:
+        #input   stream 默认通道
+        myInput: # 自定义  消息通道
+          destination: stream-demo2   #exchange名称，交换模式默认是topic

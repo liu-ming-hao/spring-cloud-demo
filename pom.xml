@@ -25,6 +25,7 @@
         <module>provider-server-demo</module><!--生产者 服务集群1-->
         <module>provider-server-demo-two</module><!--生产者 服务集群2-->
         <!--基础业务-->
+        <!--第三方服务封装-->
         <!--公共依赖包-->
     </modules>
 

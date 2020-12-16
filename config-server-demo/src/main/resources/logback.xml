@@ -42,9 +42,10 @@
     <!-- 信息输出到文件 -->
     <appender name="ALLINFO"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log_home}/config-server-demo.log</file>
         <rollingPolicy
                 class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log_home}/%d{yyyy-MM-dd}-config-server-demo.log
+            <fileNamePattern>${log_home}/%d{yyyy-MM-dd}-config-server-demo.log.gz
             </fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
@@ -57,9 +58,10 @@
     <!-- 错误输出到文件 -->
     <appender name="error"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log_home}/config-server-demo-error.log</file>
         <rollingPolicy
                 class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log_home}/%d{yyyy-MM-dd}-config-server-demo-error.log
+            <fileNamePattern>${log_home}/%d{yyyy-MM-dd}-config-server-demo-error.log.gz
             </fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>

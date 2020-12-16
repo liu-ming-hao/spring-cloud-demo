@@ -41,14 +41,16 @@
     <!-- 信息输出到文件 -->
     <appender name="ALLINFO"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <file>${log_home}/zuul-server-demo.log</file>
         <rollingPolicy
                 class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log_home}/%d{yyyy-MM-dd}-zuul-server-demo.log
+            <fileNamePattern>${log_home}/%d{yyyy-MM-dd}-zuul-server-demo.log.gz
             </fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder
-                class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                class="ch.qos.logback.classic.encoder.PatternLayoutEncoder" charset="utf-8">
             <pattern>${file_pattern}</pattern>
         </encoder>
     </appender>
@@ -56,14 +58,15 @@
     <!-- 错误输出到文件 -->
     <appender name="error"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log_home}/zuul-server-demo-error.log</file>
         <rollingPolicy
                 class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log_home}/%d{yyyy-MM-dd}-zuul-server-demo-error.log
+            <fileNamePattern>${log_home}/%d{yyyy-MM-dd}-zuul-server-demo-error.log.gz
             </fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder
-                class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                class="ch.qos.logback.classic.encoder.PatternLayoutEncoder" charset="utf-8">
             <pattern>${file_pattern}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">

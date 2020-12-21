@@ -1,0 +1,25 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/    #注册中心地址
+spring:
+  zipkin: #链路跟踪
+    base-url: http://localhost:9411
+    # 关闭服务发现，否则Spring Cloud会把zipkin的url当做服务名称
+    discoveryClientEnabled: false
+    sender:
+      type: web  # 设置使用http的方式传输数据
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0 # 设置zipkin采样比例  默认0.1
+  datasource: #数据库
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@192.168.85.49:1521:xe
+    username: m_user
+    password: 123456
+mybatis-plus: #mp
+  mapper-locations: classpath:mapper/*Mapper.xml  #映射文件扫描
+  typeAliasesPackage: com.de.providerserverdemo.model      #实体扫描

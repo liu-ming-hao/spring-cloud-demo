@@ -14,7 +14,7 @@ spring:
       client:
         enabled: true
     sampler:
-      percentage: 1.0 # 设置zipkin采样比例  默认0.1
+      probability: 1.0 # 设置zipkin采样比例  默认0.1
   cloud:
     stream: # 消息驱动
       binders:
@@ -31,3 +31,21 @@ spring:
         #input   stream 默认通道
         myInput: # 自定义  消息通道
           destination: stream-demo2   #exchange名称，交换模式默认是topic
+#开启hystrix配置
+feign:
+  hystrix:
+    enabled: true #开启熔断机制
+#负载
+ribbon:
+  ReadTimeout:  10000
+  ConnectTimeout:  10000
+  MaxAutoRetries: 0   # 最大重试次数，默认0
+  MaxAutoRetriesNextServer: 1  # 最大重试服务个数，默认1
+#熔断器参数
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 40000

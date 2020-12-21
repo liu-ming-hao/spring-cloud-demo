@@ -15,7 +15,7 @@ spring:
       client:
         enabled: true
     sampler:
-      percentage: 1.0 # 设置zipkin采样比例  默认0.1
+      probability: 1.0 # 设置zipkin采样比例  默认0.1
 #注册中心
 eureka:
   client:
@@ -23,6 +23,9 @@ eureka:
      defaultZone: http://localhost:8761/eureka/
 #网关
 zuul:
+  host:
+    connect-timeout-millis: 60000
+    socket-timeout-millis: 60000
   routes:
     #标识服务名，用于拦截请求  服务转发
     #  1
@@ -31,3 +34,17 @@ zuul:
       serviceId: consumer-service-demo
 
     #  2....
+#负载
+ribbon:
+  ReadTimeout:  60000
+  ConnectTimeout:  60000
+  MaxAutoRetries: 0   # 最大重试次数，默认0
+  MaxAutoRetriesNextServer: 1  # 最大重试服务个数，默认1
+#熔断器参数
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 240000

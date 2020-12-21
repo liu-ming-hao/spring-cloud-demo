@@ -38,6 +38,7 @@
         <lombok.version>1.16.10</lombok.version>
         <swagger2.varsion>2.9.2</swagger2.varsion>
         <ojdbc.version>11.2.0.3</ojdbc.version>
+        <mybtis-plus.version>3.1.0</mybtis-plus.version>
     </properties>
 
     <!--公共依赖-->

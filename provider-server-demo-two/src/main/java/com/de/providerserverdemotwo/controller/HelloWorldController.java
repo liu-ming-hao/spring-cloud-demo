@@ -1,9 +1,13 @@
 package com.de.providerserverdemotwo.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * HelloWorldController
@@ -14,12 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/provider")
+@Slf4j
 public class HelloWorldController {
     @Value("${server.port}")
     String serverPort;
 
     @RequestMapping("/hi")
     public String home(@RequestParam String name){
-       return "provader-server/hi" + name + ", i am from port:" + serverPort;
+        try{
+            log.info("provader-server/hi" + name + ", i am from port" + serverPort);
+            return "provader-server/hi" + name + ", i am from port:" + serverPort;
+        }catch (Exception e){
+            return "error";
+        }
     }
 }

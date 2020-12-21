@@ -55,7 +55,7 @@ public class ZuulFailBackProvider implements FallbackProvider {
 
             @Override
             public InputStream getBody() throws IOException {
-                return new ByteArrayInputStream(("Sorry, the service "+getRoute()+" is unavailable now.").getBytes());
+                return new ByteArrayInputStream(("Zuul failback--Sorry, the service "+route+" is unavailable now.").getBytes());
             }
 
             @Override

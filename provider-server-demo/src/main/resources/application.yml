@@ -19,3 +19,8 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 40000
+#Sql日志输出
+logging:
+  level:
+    com.de.providerserverdemo.dao: debug
+    com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver: WARN

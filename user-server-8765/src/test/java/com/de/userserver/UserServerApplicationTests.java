@@ -1,10 +1,10 @@
-package com.de.providerserverdemotwo;
+package com.de.userserver;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProviderServerDemoTwoApplicationTests {
+class UserServerApplicationTests {
 
     @Test
     void contextLoads() {

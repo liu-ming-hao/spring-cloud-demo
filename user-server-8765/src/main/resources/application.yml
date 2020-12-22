@@ -2,7 +2,7 @@ server:
   port: 8765
 spring:
   application:
-    name: provider-service-demo #服务名
+    name: user-service #服务名
   profiles:
     active: company  #选择加载不同环境的yml文件
 #负载

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Description   feign跨服务调用
  * @since 2020/12/8 13:36
  */
-@FeignClient(name="provider-service-demo",fallbackFactory = UserFeignClientFallback.class)
+@FeignClient(name="user-service",fallbackFactory = UserFeignClientFallback.class)
 public interface UserFeignClient {
 
     @GetMapping(value="/provider/hi")

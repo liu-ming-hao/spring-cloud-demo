@@ -1,9 +1,9 @@
-package com.de.userserver8763;
+package com.de.userserver;
 
 
-import com.de.userserver8763.dao.UserDao;
-import com.de.userserver8763.model.User;
-import com.de.userserver8763.service.IUserService;
+import com.de.userserver.dao.UserDao;
+import com.de.userserver.model.User;
+import com.de.userserver.service.IUserService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @SpringBootTest
-public class ProviderServerDemoApplicationTests {
+public class UserServerApplicationTests {
     @Autowired
     IUserService iUserService;
 

@@ -2,7 +2,7 @@ server:
   port: 8763
 spring:
   application:
-    name: user-service-8763 #服务名
+    name: user-service #服务名
   profiles:
     active: company
 #负载

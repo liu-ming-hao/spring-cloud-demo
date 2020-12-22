@@ -1,12 +1,15 @@
-package com.de.backinterfaceserver.module.user;
+package com.de.backinterfaceserver.module.user.web;
 
 
 import com.de.backinterfaceserver.feign.UserFeignClient;
+import com.de.backinterfaceserver.module.user.model.User;
+import com.de.backinterfaceserver.service.HelloService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * HelloController
@@ -19,9 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 @Api(tags = "用户服务")
 public class UserController {
-   /* @Autowired
+    @Autowired
     private HelloService helloService;
-*/
     @Autowired
     UserFeignClient userFeignClient;
 
@@ -30,8 +32,12 @@ public class UserController {
         return helloService.hiService(name);
     }*/
 
-    @RequestMapping("/hifeign")
+    @GetMapping("/hifeign")
     public String homeFeign(@RequestParam String name) {
-        return  userFeignClient.home(name);
+        return  helloService.hiServiceFeign(name);
     }
+
+    @ApiOperation("查询用户列表")
+    @PostMapping("findList")
+    public List<User> findList(@RequestBody User reqModel){return userFeignClient.findList(reqModel);}
 }

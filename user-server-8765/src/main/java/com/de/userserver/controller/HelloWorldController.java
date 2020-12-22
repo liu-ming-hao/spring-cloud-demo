@@ -2,9 +2,7 @@ package com.de.userserver.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * HelloWorldController
@@ -20,7 +18,7 @@ public class HelloWorldController {
     @Value("${server.port}")
     String serverPort;
 
-    @RequestMapping("/hi")
+    @GetMapping("/hi")
     public String home(@RequestParam String name){
         try{
             log.info("provader-server/hi" + name + ", i am from port" + serverPort);

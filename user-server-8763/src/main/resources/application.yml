@@ -22,5 +22,5 @@ hystrix:
 #Sql日志输出
 logging:
   level:
-    com.de.providerserverdemo.dao: debug
+    com.de.userserver.dao: debug
     com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver: WARN

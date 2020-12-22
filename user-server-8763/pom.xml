@@ -9,11 +9,11 @@
         <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
 
-    <artifactId>provider-server-demo</artifactId>
+    <artifactId>user-server-8763</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>provider-server-demo</name>
-    <description>provider1 project for Spring Boot</description>
+    <name>user-server-8763</name>
+    <description>userserver8763 project for Spring Boot</description>
 
 
     <dependencies>

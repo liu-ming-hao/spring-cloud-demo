@@ -1,16 +1,12 @@
-package com.de.providerserverdemo;
+package com.de.userserver8763;
 
 
-import com.de.providerserverdemo.dao.UserDao;
-import com.de.providerserverdemo.model.User;
-import com.de.providerserverdemo.service.IUserService;
-import javafx.application.Application;
-import lombok.SneakyThrows;
+import com.de.userserver8763.dao.UserDao;
+import com.de.userserver8763.model.User;
+import com.de.userserver8763.service.IUserService;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 

@@ -22,7 +22,7 @@
         <!--接口汇总 路由-->
         <module>back-interface-server</module><!--消费者 服务-->
         <!--核心业务-->
-        <module>provider-server-demo</module><!--生产者 服务集群1-->
+        <module>user-server-8763</module><!--生产者 服务集群1-->
         <module>provider-server-demo-two</module><!--生产者 服务集群2-->
         <!--基础业务-->
         <!--第三方服务封装-->

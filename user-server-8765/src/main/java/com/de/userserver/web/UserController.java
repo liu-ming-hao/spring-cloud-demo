@@ -1,7 +1,10 @@
 package com.de.userserver.web;
 
+import com.de.publicpackage.result.CodeMsg;
+import com.de.publicpackage.result.Result;
 import com.de.userserver.model.User;
 import com.de.userserver.service.IUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,14 +20,20 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
     @Autowired
     private IUserService thisService;
 
     @PostMapping("/findList")
-    public List<User> findList(@RequestBody User reqModel){
-        List<User> listRes = thisService.findList(reqModel);
-        return listRes;
+    public Result<List<User>> findList(@RequestBody User reqModel){
+        try{
+            List<User> listRes = thisService.findList(reqModel);
+            return Result.success(listRes);
+        }catch (Exception e){
+            log.error(e.getMessage());
+            return Result.error(CodeMsg.FIND_LIST_ERROR);
+        }
     }
     @PostMapping("/insert")
     public void insert(@RequestBody User reqModel){

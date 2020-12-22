@@ -41,6 +41,12 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybtis-plus.version}</version>
         </dependency>
+        <!--引入公共包-->
+        <dependency>
+            <groupId>com.de</groupId>
+            <artifactId>public-package</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -27,6 +27,7 @@
         <!--基础业务-->
         <!--第三方服务封装-->
         <!--公共依赖包-->
+        <module>public-package</module>
     </modules>
 
     <!--版本号配置-->

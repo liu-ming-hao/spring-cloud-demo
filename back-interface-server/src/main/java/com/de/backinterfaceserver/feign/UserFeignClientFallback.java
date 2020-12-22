@@ -1,6 +1,8 @@
 package com.de.backinterfaceserver.feign;
 
 import com.de.backinterfaceserver.module.user.model.User;
+import com.de.publicpackage.result.CodeMsg;
+import com.de.publicpackage.result.Result;
 import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -29,9 +31,9 @@ public class UserFeignClientFallback implements FallbackFactory<UserFeignClient>
             }
 
             @Override
-            public List<User> findList(User reqModel) {
+            public Result<List<User>> findList(User reqModel) {
                 log.info("User-Feign fallback: " + throwable);
-                return new ArrayList<>();
+                return Result.error(new CodeMsg(-101,"user-feign fallback:" + throwable));
             }
         };
     }

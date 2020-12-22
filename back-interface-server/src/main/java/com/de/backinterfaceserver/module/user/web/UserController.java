@@ -4,6 +4,7 @@ package com.de.backinterfaceserver.module.user.web;
 import com.de.backinterfaceserver.feign.UserFeignClient;
 import com.de.backinterfaceserver.module.user.model.User;
 import com.de.backinterfaceserver.service.HelloService;
+import com.de.publicpackage.result.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,5 @@ public class UserController {
 
     @ApiOperation("查询用户列表")
     @PostMapping("findList")
-    public List<User> findList(@RequestBody User reqModel){return userFeignClient.findList(reqModel);}
+    public Result<List<User>> findList(@RequestBody User reqModel){return userFeignClient.findList(reqModel);}
 }

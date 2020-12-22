@@ -1,6 +1,7 @@
 package com.de.backinterfaceserver.feign;
 
 import com.de.backinterfaceserver.module.user.model.User;
+import com.de.publicpackage.result.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,5 +24,5 @@ public interface UserFeignClient {
     String home(@RequestParam String name);
 
     @PostMapping("/user/findList")
-    List<User> findList(@RequestBody User reqModel);
+    Result<List<User>> findList(@RequestBody User reqModel);
 }

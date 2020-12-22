@@ -20,7 +20,7 @@
         <module>config-server-demo</module><!--配置中心-->
         <module>stream-server-demo</module><!--消息通道 MQ-->
         <!--接口汇总 路由-->
-        <module>consumer-server-demo</module><!--消费者 服务-->
+        <module>back-interface-server</module><!--消费者 服务-->
         <!--核心业务-->
         <module>provider-server-demo</module><!--生产者 服务集群1-->
         <module>provider-server-demo-two</module><!--生产者 服务集群2-->

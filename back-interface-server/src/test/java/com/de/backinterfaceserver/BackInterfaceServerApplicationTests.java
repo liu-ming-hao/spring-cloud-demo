@@ -1,10 +1,11 @@
-package com.de.consumerserverdemo;
+package com.de.backinterfaceserver;
+
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ConsumerServerDemoApplicationTests {
+class BackInterfaceServerApplicationTests {
 
     @Test
     void contextLoads() {

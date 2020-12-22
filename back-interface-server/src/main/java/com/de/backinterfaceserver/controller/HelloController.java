@@ -1,6 +1,7 @@
-package com.de.consumerserverdemo.controller;
+package com.de.backinterfaceserver.controller;
 
-import com.de.consumerserverdemo.service.HelloService;
+
+import com.de.backinterfaceserver.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

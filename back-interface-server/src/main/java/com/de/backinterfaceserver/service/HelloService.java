@@ -1,6 +1,7 @@
-package com.de.consumerserverdemo.service;
+package com.de.backinterfaceserver.service;
 
-import com.de.consumerserverdemo.feign.UserFeignClient;
+
+import com.de.backinterfaceserver.feign.UserFeignClient;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

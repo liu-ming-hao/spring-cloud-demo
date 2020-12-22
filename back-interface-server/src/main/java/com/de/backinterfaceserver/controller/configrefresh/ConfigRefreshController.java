@@ -1,4 +1,4 @@
-package com.de.consumerserverdemo.controller.configrefresh;
+package com.de.backinterfaceserver.controller.configrefresh;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;

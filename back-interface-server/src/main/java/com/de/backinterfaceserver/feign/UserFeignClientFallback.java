@@ -1,4 +1,4 @@
-package com.de.consumerserverdemo.feign;
+package com.de.backinterfaceserver.feign;
 
 import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;

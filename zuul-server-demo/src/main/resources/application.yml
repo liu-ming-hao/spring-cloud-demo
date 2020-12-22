@@ -30,8 +30,8 @@ zuul:
     #标识服务名，用于拦截请求  服务转发
     #  1
     consumerServiceDemo:
-      path: /consumerServiceDemo/**
-      serviceId: consumer-service-demo
+      path: /backInterfaceService/**
+      serviceId: back-interface-service
 
     #  2....
 #负载

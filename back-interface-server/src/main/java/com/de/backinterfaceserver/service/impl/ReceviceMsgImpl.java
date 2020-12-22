@@ -1,12 +1,12 @@
-package com.de.consumerserverdemo.service.impl;
+package com.de.backinterfaceserver.service.impl;
 
-import com.de.consumerserverdemo.service.MyBindings;
-import com.de.consumerserverdemo.service.ReceviceMsg;
+
+import com.de.backinterfaceserver.service.MyBindings;
+import com.de.backinterfaceserver.service.ReceviceMsg;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.stereotype.Service;
 
 /**

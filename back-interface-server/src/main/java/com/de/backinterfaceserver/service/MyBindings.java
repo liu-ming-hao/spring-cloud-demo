@@ -1,4 +1,4 @@
-package com.de.consumerserverdemo.service;
+package com.de.backinterfaceserver.service;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;

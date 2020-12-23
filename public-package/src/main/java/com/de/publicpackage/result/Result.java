@@ -10,9 +10,13 @@ import java.io.Serializable;
  * @since 2020/12/22 16:07
  */
 public class Result<T> implements Serializable {
+    private static final long serialVersionUID = -2903063547272237245L;
+
     private int code;
     private String msg;
     private T data;
+
+    public Result(){}
 
     private Result(T data) {
         this.code = 1;

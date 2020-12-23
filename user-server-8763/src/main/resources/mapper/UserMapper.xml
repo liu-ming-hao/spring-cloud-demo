@@ -46,11 +46,4 @@
             </where>
     </sql>
 
-    <!-- 通用查询方法 -->
-    <select id="findList" resultMap="BaseResultMap">
-        SELECT <include refid="Base_Column_List"/>
-        FROM A_USER
-        <include refid="dynamicWhere" />
-    </select>
-
 </mapper>

@@ -1,6 +1,8 @@
 package com.de.backinterfaceserver.feign;
 
+
 import com.de.backinterfaceserver.module.user.model.User;
+import com.de.publicpackage.page.PageRes;
 import com.de.publicpackage.result.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,9 @@ public interface UserFeignClient {
     @GetMapping(value="/provider/hi")
     String home(@RequestParam String name);
 
-    @PostMapping("/user/findList")
-    Result<List<User>> findList(@RequestBody User reqModel);
+    @PostMapping("/user/selectList")
+    Result<List<User>> selectList(@RequestBody User reqModel);
+
+    @PostMapping("/user/selectPage")
+    public Result<PageRes>  selectPage(@RequestBody User reqModel);
 }

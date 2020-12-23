@@ -1,6 +1,7 @@
 package com.de.userserver.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.de.publicpackage.page.PageRes;
 import com.de.userserver.model.User;
 
 import java.util.List;
@@ -14,7 +15,8 @@ import java.util.List;
  * @since 2020-12-21
  */
 public interface IUserService extends IService<User> {
-    public List<User> findList(User reqModel);
+    public List<User> selectList(User reqModel);
+    public PageRes selectPage(User reqModel);
     public void insert(User reqModel);
     public boolean updateById(User reqModel);
     public void deleteById(String id);

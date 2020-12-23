@@ -22,7 +22,7 @@ public class UserServerApplicationTests {
     @Test
     public void contextLoads() {
         User user = new User();
-        List<User> res = iUserService.findList(user);
+        //List<User> res = iUserService.findList(user);
         System.out.println("ok");
     }
 

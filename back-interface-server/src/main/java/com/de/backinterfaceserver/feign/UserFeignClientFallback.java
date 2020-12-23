@@ -1,6 +1,7 @@
 package com.de.backinterfaceserver.feign;
 
 import com.de.backinterfaceserver.module.user.model.User;
+import com.de.publicpackage.page.PageRes;
 import com.de.publicpackage.result.CodeMsg;
 import com.de.publicpackage.result.Result;
 import feign.hystrix.FallbackFactory;
@@ -31,9 +32,15 @@ public class UserFeignClientFallback implements FallbackFactory<UserFeignClient>
             }
 
             @Override
-            public Result<List<User>> findList(User reqModel) {
+            public Result<List<User>> selectList(User reqModel) {
                 log.info("User-Feign fallback: " + throwable);
                 return Result.error(new CodeMsg(-101,"user-feign fallback:" + throwable));
+            }
+
+            @Override
+            public Result<PageRes> selectPage(User reqModel) {
+                log.info("User-Feign fallback: " + throwable);
+                return Result.error(new CodeMsg(-102,"user-feign fallback:" + throwable));
             }
         };
     }

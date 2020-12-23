@@ -1,5 +1,9 @@
 package com.de.userserver.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.de.publicpackage.page.PageRes;
 import com.de.userserver.model.User;
 import com.de.userserver.dao.UserDao;
 import com.de.userserver.service.IUserService;
@@ -22,9 +26,15 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements IUser
     @Autowired
     UserDao  thisMapper;
     @Override
-    public List<User> findList(User reqModel){
-        List<User> listRes = thisMapper.findList(reqModel);
+    public List<User> selectList(User reqModel){
+        List<User> listRes = thisMapper.selectList(new QueryWrapper<User>(reqModel));
         return listRes;
+    }
+    @Override
+    public PageRes selectPage(User reqModel) {
+        Page<User> pageset = new Page<>(5,10);
+        IPage<User> selectPageRes = thisMapper.selectPage(pageset,new QueryWrapper<User>(reqModel));
+        return new PageRes(selectPageRes.getTotal(),5,10,selectPageRes.getRecords());
     }
     @Override
     public void insert(User reqModel){

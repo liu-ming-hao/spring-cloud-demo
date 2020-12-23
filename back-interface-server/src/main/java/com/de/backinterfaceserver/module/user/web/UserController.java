@@ -4,6 +4,7 @@ package com.de.backinterfaceserver.module.user.web;
 import com.de.backinterfaceserver.feign.UserFeignClient;
 import com.de.backinterfaceserver.module.user.model.User;
 import com.de.backinterfaceserver.service.HelloService;
+import com.de.publicpackage.page.PageRes;
 import com.de.publicpackage.result.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,6 +40,10 @@ public class UserController {
     }
 
     @ApiOperation("查询用户列表")
-    @PostMapping("findList")
-    public Result<List<User>> findList(@RequestBody User reqModel){return userFeignClient.findList(reqModel);}
+    @PostMapping("/selectList")
+    public Result<List<User>> findList(@RequestBody User reqModel){return userFeignClient.selectList(reqModel);}
+
+    @ApiOperation("查询用户列表-分页")
+    @PostMapping("/selectPage")
+    public Result<PageRes>  selectPage(@RequestBody User reqModel){return userFeignClient.selectPage(reqModel);}
 }

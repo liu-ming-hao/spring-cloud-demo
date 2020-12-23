@@ -1,5 +1,6 @@
 package com.de.userserver.web;
 
+import com.de.publicpackage.page.PageRes;
 import com.de.publicpackage.result.CodeMsg;
 import com.de.publicpackage.result.Result;
 import com.de.userserver.model.User;
@@ -25,16 +26,26 @@ public class UserController {
     @Autowired
     private IUserService thisService;
 
-    @PostMapping("/findList")
-    public Result<List<User>> findList(@RequestBody User reqModel){
+    @PostMapping("/selectList")
+    public Result<List<User>> selectList(@RequestBody User reqModel){
         try{
-            List<User> listRes = thisService.findList(reqModel);
+            List<User> listRes = thisService.selectList(reqModel);
             return Result.success(listRes);
         }catch (Exception e){
             log.error(e.getMessage());
             return Result.error(CodeMsg.FIND_LIST_ERROR);
         }
     }
+    @PostMapping("/selectPage")
+    public Result<PageRes>  selectPage(@RequestBody User reqModel){
+        try{
+            PageRes listRes = thisService.selectPage(reqModel);
+            return Result.success(listRes);
+        }catch (Exception e){
+            log.error(e.getMessage());
+            return Result.error(CodeMsg.FIND_LIST_ERROR);
+        }
+    };
     @PostMapping("/insert")
     public void insert(@RequestBody User reqModel){
         thisService.insert(reqModel);

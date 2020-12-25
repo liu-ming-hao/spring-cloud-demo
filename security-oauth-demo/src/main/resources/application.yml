@@ -3,6 +3,28 @@ server:
 spring:
   application:
     name: security-oauth-demo
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/ #注册中心地址
+#开启hystrix配置
+feign:
+  hystrix:
+    enabled: true #开启熔断机制
+#负载
+ribbon:
+  ReadTimeout:  10000
+  ConnectTimeout:  10000
+  MaxAutoRetries: 0   # 最大重试次数，默认0
+  MaxAutoRetriesNextServer: 1  # 最大重试服务个数，默认1
+#熔断器参数
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 40000
 
 cis:
   security:

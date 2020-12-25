@@ -3,22 +3,28 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.7.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>com.de</groupId>
+        <artifactId>spring-cloud-demo</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.de</groupId>
+
     <artifactId>security-oauth-demo</artifactId>
+    <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>security-oauth-demo</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
-        <java.version>1.8</java.version>
+
     </properties>
 
     <dependencies>
+        <!--服务发现-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>

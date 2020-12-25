@@ -1,0 +1,17 @@
+server:
+  port: 8771
+spring:
+  application:
+    name: security-oauth-demo
+
+cis:
+  security:
+    authentication: #授权相关
+      #表单认证
+      loginPage: /login/page #登录页面
+      loginProcessingUrl: /login/form #登录提交处理
+      usernameParameter: name #用户名属性名称
+      passwordParameter: pwd #密码属性名称
+      defaultSuccessUrl: /hello #登录成功处理
+      apiAntMatchers:  #免认证接口 ，数组用-
+      - /login/page

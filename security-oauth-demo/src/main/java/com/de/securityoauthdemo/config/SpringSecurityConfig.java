@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -32,6 +33,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     //yml获取配置信息
     @Autowired
     private SecurityProperties securityProperties;
+
+    @Autowired
+    private UserDetailsService customUserDetailService;
 
     /**
      * 密码加密
@@ -65,12 +69,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         //默认SpringSecurity生成
         //super.configure(auth);
         //内存
-        auth.inMemoryAuthentication()
+        /*auth.inMemoryAuthentication()
                 .withUser("neicun")
                 .password(passwordEncoder().encode("neicun"))//密码加密。否则报错
                 .authorities("ADMIN")//授权
-        ;
+        ;*/
         //数据库
+        auth.userDetailsService(customUserDetailService);
 
     }
 

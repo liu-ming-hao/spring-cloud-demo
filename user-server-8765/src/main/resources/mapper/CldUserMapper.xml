@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.de.userserver.dao.CldUserDao">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.de.userserver.model.CldUser">
+                    <id column="ID" property="id" />
+                    <result column="NAME" property="name" />
+                    <result column="PASSWORD" property="password" />
+                    <result column="IS_ACCOUNT_NON_EXPIRED" property="isAccountNonExpired" />
+                    <result column="IS_ACCOUNT_NON_LOCK" property="isAccountNonLock" />
+                    <result column="IS_CREDENTIALS_NON_EXPIRED" property="isCredentialsNonExpired" />
+                    <result column="IS_ENABLED" property="isEnabled" />
+                    <result column="IS_DELETE" property="isDelete" />
+                    <result column="CREATE_TIME" property="createTime" />
+                    <result column="UPDATE_TIME" property="updateTime" />
+        </resultMap>
+
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, NAME, PASSWORD, IS_ACCOUNT_NON_EXPIRED, IS_ACCOUNT_NON_LOCK, IS_CREDENTIALS_NON_EXPIRED, IS_ENABLED, IS_DELETE, CREATE_TIME, UPDATE_TIME
+    </sql>
+
+    <!-- 通用查询条件 -->
+    <sql id="dynamicWhere">
+            <where>
+                    <if test="id!=null and id!=''"> AND ID = #{id} </if>
+                    <if test="name!=null and name!=''"> AND NAME = #{name} </if>
+                    <if test="password!=null and password!=''"> AND PASSWORD = #{password} </if>
+                    <if test="isAccountNonExpired!=null and isAccountNonExpired!=''"> AND IS_ACCOUNT_NON_EXPIRED = #{isAccountNonExpired} </if>
+                    <if test="isAccountNonLock!=null and isAccountNonLock!=''"> AND IS_ACCOUNT_NON_LOCK = #{isAccountNonLock} </if>
+                    <if test="isCredentialsNonExpired!=null and isCredentialsNonExpired!=''"> AND IS_CREDENTIALS_NON_EXPIRED = #{isCredentialsNonExpired} </if>
+                    <if test="isEnabled!=null and isEnabled!=''"> AND IS_ENABLED = #{isEnabled} </if>
+                    <if test="isDelete!=null and isDelete!=''"> AND IS_DELETE = #{isDelete} </if>
+                    <if test="createTime!=null"> AND CREATE_TIME = #{createTime} </if>
+                    <if test="updateTime!=null"> AND UPDATE_TIME = #{updateTime} </if>
+            </where>
+    </sql>
+
+    <!-- 通用查询方法
+    <select id="findList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM CLD_USER
+        <include refid="dynamicWhere" />
+    </select>
+     -->
+</mapper>

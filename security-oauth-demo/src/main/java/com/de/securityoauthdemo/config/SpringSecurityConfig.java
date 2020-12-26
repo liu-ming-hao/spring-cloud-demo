@@ -16,6 +16,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+
+import javax.sql.DataSource;
+
 
 /**
  * SpringSecurityConfig
@@ -49,6 +53,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     //过滤器 验证码校验
     @Autowired
     private ImageCodeValidateFilter imageCodeValidateFilter;
+    //
+    @Autowired
+    DataSource dataSource;
+
 
     /**
      * 密码加密
@@ -114,6 +122,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests() //认证请求
                 .antMatchers(securityProperties.getAuthentication().getApiAntMatchers()).permitAll() //免认证
                 .anyRequest().authenticated() //所有进入应用的Http请求都需要认证
+                .and()
+                .rememberMe()//配置记住我功能
+                .tokenRepository(jdbcTokenRepository()) //保存登录信息
+                .tokenValiditySeconds(60*60*24)//记住我有效时长
         ;
         //默认都会产生一个hiden标签 里面有安全相关的验证 防止请求伪造 这边我们暂时不需要 可禁用掉
         http .csrf().disable();
@@ -128,4 +140,27 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         super.configure(web);
     }
+
+    /**
+     * 记住我功能（security  remenber-me）
+     * 1.用户选择‘记住我’成功登录后，将username+序列号+token 存入数据库表中
+     *       ，同时将三者组成cookie 发送给客户端浏览器
+     * 2.当未登录的客户访问系统，首先检查remember-me的cookie值
+     *        ，有则检查其username+序列号+token与数据库中对比，一致则通过认证
+     *        ，同时 系统生成一个新的token，替换数据库中的旧token。序列号series保持不变
+     *              ，并 删除旧的cookie。生成新的cookie（新token + 旧序列号 + username）发送客户端
+     * 3.如果对应cookie不存在、或者username\序列号和token 与数据库中保存的不一致
+     *          ,将引导用户进入登录页面
+     *  *******  cookie被盗用的情况，用户下次登录前该cookie存在安全漏洞。系统安全性要求高的场景不适合
+     * @return JdbcTokenRepositoryImpl
+     */
+    @Bean
+    public JdbcTokenRepositoryImpl jdbcTokenRepository() {
+        JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+        jdbcTokenRepository.setDataSource(dataSource);
+        // 是否启动项目时自动创建表，true自动创建  第一次启动后 注释掉
+        //jdbcTokenRepository.setCreateTableOnStartup(true);
+        return jdbcTokenRepository;
+    }
+
 }

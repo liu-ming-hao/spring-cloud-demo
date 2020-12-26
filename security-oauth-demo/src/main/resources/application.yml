@@ -3,6 +3,11 @@ server:
 spring:
   application:
     name: security-oauth-demo
+  datasource: #数据库
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:orcl
+    username: c##lmh
+    password: 123456
 eureka:
   client:
     serviceUrl:

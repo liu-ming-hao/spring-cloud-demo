@@ -1,27 +1,112 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>第一个HTML页面</title>
-</head>
-<html lang="en">
-<head>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head  lang="en">
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <style type="text/css">
+        body {
+            padding: 10px;
+        }
+        #inputtext {
+            width: 100%;
+        }
+        #login{
+            width: 300px;
+            margin:0px auto;
+            padding-top: 60px;
+        }
+       /* #flushimg{
+            text-decoration: underline;
+        }*/
+        #butt{
+            width: 60%;
+        }
+    </style>
 </head>
 <body>
-自定义表单验证:
-<!--<form name="f" action="/login" method="post">-->
+<div id="login">
+    <form action="/login/form" method="post">
+        <h2 align="center">L O G I N</h2><br/><br/>
+        <input type="text" name="name" class="form-control" id="name" required autofocus placeholder="-----请输入用户名-----"/><br/>
+        <input type="password" name="pwd" class="form-control" id="pwd" required placeholder="----请输入用户密码----"/><br/>
+        <div id="flushimg">
+            <img alt="验证码" onclick="this.src='/login/code/image?' + Math.random()" src="/login/code/image" />
+            <a>看不清？点击图片刷新一下</a>
+        </div>
+        <input type="text" id="verificationCode" name="verificationCode" class="form-control"  placeholder="-----请输入验证码-----" />
+        <div th:if="${param.error}">
+            <span th:text="${session.SPRING_SECURITY_LAST_EXCEPTION?.message}" style="color:red">用户名或密码错误</span>
+        </div>
+        <div style="width: 100%;text-align: center;"><input type="submit" value="登 录" id="butt" class="btn btn-success" /></div>
+    </form>
+</div>
+<!--自定义表单验证:
+&lt;!&ndash;<form name="f" action="/login" method="post">&ndash;&gt;
 <form name="f" action="/login/form" method="post">
     <br/>
     用户名:
     <input type="text" name="name" placeholder="用户名"><br/>
     密码:
     <input type="password" name="pwd" placeholder="密码"><br/>
+    <img onclick="this.src='/login/code/image?'+Math.random()" src="/login/code/image" alt="验证码"  />
+
     <div th:if="${param.error}">
         <span th:text="${session.SPRING_SECURITY_LAST_EXCEPTION?.message}" style="color:red">用户名或密码错误</span>
     </div>
     <input name="submit" type="submit" value="提交">
-</form>
+</form>-->
 </body>
 </html>
+
+<!--
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    &lt;!&ndash;<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>&ndash;&gt;
+    <style type="text/css">
+        body {
+            padding: 10px;
+        }
+        #inputtext {
+            width: 100%;
+        }
+        #login{
+            width: 300px;
+            margin:0px auto;
+            padding-top: 60px;
+        }
+        #flushimg{
+            text-decoration: underline;
+        }
+        #butt{
+            width: 60%;
+        }
+    </style>
+</head>
+<body>
+<div id="login">
+    <form action="/login" method="post">
+        <h2 align="center">L O G I N</h2><br/><br/>
+        <input type="text" name="name" class="form-control" id="name" required autofocus placeholder="-&#45;&#45;&#45;&#45;请输入用户名-&#45;&#45;&#45;&#45;"/><br/>
+        <input type="password" name="pwd" class="form-control" id="pwd" required placeholder="&#45;&#45;&#45;&#45;请输入用户密码&#45;&#45;&#45;&#45;"/><br/>
+        <div id="flushimg">
+            <img alt="验证码" onclick="this.src='/login/code/image=' + +Math.random()" src="/login/code/image" />
+            <a>看不清？点击图片刷新一下</a>
+        </div>
+        <input type="text" name="tryCode" class="form-control" required placeholder="-&#45;&#45;&#45;&#45;请输入验证码-&#45;&#45;&#45;&#45;" />
+        &lt;!&ndash;<h4 th:text="${info}" style="color: red"></h4>
+        <input type="checkbox" name="rememberMe"/>记住我<br/>&ndash;&gt;
+        <div th:if="${param.error}">
+            &lt;!&ndash;/*@thymesVar id="SPRING_SECURITY_LAST_EXCEPTION" type=""*/&ndash;&gt;
+            <span th:text="${session.SPRING_SECURITY_LAST_EXCEPTION?.message}" style="color:red">用户名或密码错误</span>
+        </div>
+        <div style="width: 100%;text-align: center;"><input type="submit" value="登 录" id="butt" class="btn" /></div>
+    </form>
+</div>
+</body>
+</html>
+-->

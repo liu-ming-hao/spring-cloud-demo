@@ -36,4 +36,5 @@ cis:
       passwordParameter: pwd #密码属性名称
       defaultSuccessUrl: /hello #登录成功处理
       apiAntMatchers:  #免认证接口 ，数组用-
-      - /login/page
+      - /login/**
+      loginHandlerType: REDIRECT #认证之后的处理方式

@@ -17,8 +17,8 @@ spring:
       probability: 1.0 # 设置zipkin采样比例  默认0.1
   datasource: #数据库
     driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@192.168.85.49:1521:xe
-    username: m_user
+    url: jdbc:oracle:thin:@localhost:1521:orcl
+    username: c##lmh
     password: 123456
 mybatis-plus: #mp
   mapper-locations: classpath:mapper/*Mapper.xml  #映射文件扫描

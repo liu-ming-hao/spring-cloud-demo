@@ -1,5 +1,6 @@
 package com.de.securityoauthdemo.config;
 
+import com.de.securityoauthdemo.filter.ImageCodeValidateFilter;
 import com.de.securityoauthdemo.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * SpringSecurityConfig
@@ -33,9 +37,18 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     //yml获取配置信息
     @Autowired
     private SecurityProperties securityProperties;
-
+    //自定义认证用户数据源
     @Autowired
     private UserDetailsService customUserDetailService;
+    //自定义认证成功处理
+    @Autowired
+    private AuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    //自定义认证失败处理
+    @Autowired
+    private AuthenticationFailureHandler customAuthenticationFailureHandler;
+    //过滤器 验证码校验
+    @Autowired
+    private ImageCodeValidateFilter imageCodeValidateFilter;
 
     /**
      * 密码加密
@@ -89,12 +102,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //http.httpBasic() //采用httpBasic认证方式（弹窗）
-        http.formLogin()//表单认证  页面形式
+        http.addFilterBefore(imageCodeValidateFilter, UsernamePasswordAuthenticationFilter.class) //过滤  验证码
+                .formLogin()//表单认证  页面形式
                 .loginPage(securityProperties.getAuthentication().getLoginPage())//自定义登录页面
                 .loginProcessingUrl(securityProperties.getAuthentication().getLoginProcessingUrl())//登录表单提交处理url,默认是/login
                 .usernameParameter(securityProperties.getAuthentication().getUsernameParameter()) //定义登录表单 用户名属性名称
                 .passwordParameter(securityProperties.getAuthentication().getPasswordParameter()) //定义登录表单 密码
-                .defaultSuccessUrl(securityProperties.getAuthentication().getDefaultSuccessUrl()) //登录成功处理
+                .successHandler(customAuthenticationSuccessHandler) //认证成功处理
+                .failureHandler(customAuthenticationFailureHandler) //认证失败处理
                 .and()
                 .authorizeRequests() //认证请求
                 .antMatchers(securityProperties.getAuthentication().getApiAntMatchers()).permitAll() //免认证

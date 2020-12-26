@@ -1,5 +1,6 @@
 package com.de.securityoauthdemo.properties;
 
+import com.de.securityoauthdemo.securityenum.SecurityEnum;
 import lombok.Data;
 
 /**
@@ -17,4 +18,6 @@ public class AuthenticationProperties {
     private String passwordParameter;
     private String defaultSuccessUrl;
     private String[] apiAntMatchers;
+
+    private SecurityEnum loginHandlerType;
 }

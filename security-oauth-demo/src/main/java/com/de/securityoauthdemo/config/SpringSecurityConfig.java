@@ -1,6 +1,9 @@
 package com.de.securityoauthdemo.config;
 
+import com.de.securityoauthdemo.component.MobileAuthenticationConfig;
 import com.de.securityoauthdemo.filter.ImageCodeValidateFilter;
+import com.de.securityoauthdemo.filter.MobileValidateFilter;
+import com.de.securityoauthdemo.mobile.MobileAuthenticationFilter;
 import com.de.securityoauthdemo.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -50,10 +53,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     //自定义认证失败处理
     @Autowired
     private AuthenticationFailureHandler customAuthenticationFailureHandler;
-    //过滤器 验证码校验
+    //过滤器 图形验证码
     @Autowired
     private ImageCodeValidateFilter imageCodeValidateFilter;
-    //
+    //过滤器 手机认证
+    @Autowired
+    private MobileValidateFilter mobileValidateFilter;
+    //手机号验证组合
+    @Autowired
+    private MobileAuthenticationConfig mobileAuthenticationConfig;
+
     @Autowired
     DataSource dataSource;
 
@@ -109,8 +118,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        /**
+         * .addFilterBefore（A,B）
+         * 请求前过滤，如果 A 通过验证，则进入 B 验证。
+         */
         //http.httpBasic() //采用httpBasic认证方式（弹窗）
-        http.addFilterBefore(imageCodeValidateFilter, UsernamePasswordAuthenticationFilter.class) //过滤  验证码
+        http.addFilterBefore(mobileValidateFilter, UsernamePasswordAuthenticationFilter.class) //手机验证码登陆：过滤 手机号
+                .addFilterBefore(imageCodeValidateFilter, UsernamePasswordAuthenticationFilter.class) //用户名密码登陆：过滤 验证码
                 .formLogin()//表单认证  页面形式
                 .loginPage(securityProperties.getAuthentication().getLoginPage())//自定义登录页面
                 .loginProcessingUrl(securityProperties.getAuthentication().getLoginProcessingUrl())//登录表单提交处理url,默认是/login
@@ -129,6 +143,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         ;
         //默认都会产生一个hiden标签 里面有安全相关的验证 防止请求伪造 这边我们暂时不需要 可禁用掉
         http .csrf().disable();
+        //将手机配置组合添加到过滤器链上
+        http.apply(mobileAuthenticationConfig);
     }
 
     /**
@@ -162,5 +178,4 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         //jdbcTokenRepository.setCreateTableOnStartup(true);
         return jdbcTokenRepository;
     }
-
 }

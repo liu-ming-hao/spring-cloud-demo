@@ -26,7 +26,7 @@ public class Result<T> implements Serializable {
 
     private Result(CodeMsg codeMsg){
         this.code = codeMsg.getCode();
-        this.msg = codeMsg.getMag();
+        this.msg = codeMsg.getMsg();
     }
 
     public static <T> Result<T> success(T data){

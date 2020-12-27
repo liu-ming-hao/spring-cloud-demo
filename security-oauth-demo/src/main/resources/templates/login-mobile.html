@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head  lang="en">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <style type="text/css">
+        body {
+            padding: 10px;
+        }
+        #inputtext {
+            width: 100%;
+        }
+        #login{
+            width: 300px;
+            margin:0px auto;
+            padding-top: 60px;
+        }
+       /* #flushimg{
+            text-decoration: underline;
+        }*/
+        #butt{
+            width: 60%;
+        }
+    </style>
+</head>
+<body>
+<div id="login">
+    <form action="/login/mobile/form" method="post">
+        <h2 align="center">L O G I N</h2><br/>
+        <a id="pwdlogin" href="http://localhost:8771/login/page" class="btn">用户名密码登陆</a><br/>
+        <input type="text" name="mobile" class="form-control" id="mobile" required autofocus placeholder="-----请输入手机号-----"/><br/>
+        <input type="text" name="content" class="form-control" id="content"  autofocus placeholder="-----短信验证码-----"/>
+        <a id="sendCode" th:attr="code_url=@{/login/code/mobile?mobile=}" class="btn">获取验证码</a><br/>
+        <div th:if="${param.error}">
+            <span th:text="${session.SPRING_SECURITY_LAST_EXCEPTION?.message}" style="color:red">用户名或密码错误</span>
+        </div>
+        <div style="width: 100%;text-align: center;"><input type="submit" value="登 录" id="butt" class="btn btn-success" /></div>
+    </form>
+</div>
+<script type="text/javascript">
+
+    //发送验证码
+    $("#sendCode").click(function (){
+        var mobile = $('#mobile').val();
+        if(mobile == ''){
+            alert("手机号不能为空");
+            return;
+        }
+        var url = $(this).attr("code_url") + mobile;
+        $.get(url, function(data){
+            //alert(JSON.stringify(data));
+            alert(data.data.code === 200 ? "发送成功" : "发送失败");
+            //if(data.data.code === 200){
+             //   $('#content').val(data.data.msg);
+            //}
+        });
+    })
+</script>
+</body>
+</html>

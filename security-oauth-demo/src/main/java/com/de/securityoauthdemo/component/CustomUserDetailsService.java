@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * 配置用户名密码认证 数据源
  * 自定义用户信息数据源:  UserDetailsService
  * 需要实现security：UserDetailsService
  * 重写loadUserByUsername

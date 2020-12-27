@@ -27,14 +27,15 @@
 <body>
 <div id="login">
     <form action="/login/form" method="post">
-        <h2 align="center">L O G I N</h2><br/><br/>
+        <h2 align="center">L O G I N</h2><br/>
+        <a id="mobilelogin" href="http://localhost:8771/login/mobile/page" class="btn">手机短信登陆</a><br/>
         <input type="text" name="name" class="form-control" id="name" required autofocus placeholder="-----请输入用户名-----"/><br/>
         <input type="password" name="pwd" class="form-control" id="pwd" required placeholder="----请输入用户密码----"/><br/>
         <div id="flushimg">
             <img alt="验证码" onclick="this.src='/login/code/image?' + Math.random()" src="/login/code/image" />
             <a>看不清？点击图片刷新一下</a>
         </div>
-        <input type="text" id="verificationCode" name="verificationCode" class="form-control"  placeholder="-----请输入验证码-----" />
+        <input type="text" id="verificationCode" name="verificationCode" class="form-control"  placeholder="-----请输入验证码-----" /><br/>
         <input type="checkbox" id="remember-me" name="remember-me"/>记住我<br/>
         <div th:if="${param.error}">
             <span th:text="${session.SPRING_SECURITY_LAST_EXCEPTION?.message}" style="color:red">用户名或密码错误</span>
@@ -42,21 +43,6 @@
         <div style="width: 100%;text-align: center;"><input type="submit" value="登 录" id="butt" class="btn btn-success" /></div>
     </form>
 </div>
-<!--自定义表单验证:
-&lt;!&ndash;<form name="f" action="/login" method="post">&ndash;&gt;
-<form name="f" action="/login/form" method="post">
-    <br/>
-    用户名:
-    <input type="text" name="name" placeholder="用户名"><br/>
-    密码:
-    <input type="password" name="pwd" placeholder="密码"><br/>
-    <img onclick="this.src='/login/code/image?'+Math.random()" src="/login/code/image" alt="验证码"  />
-
-    <div th:if="${param.error}">
-        <span th:text="${session.SPRING_SECURITY_LAST_EXCEPTION?.message}" style="color:red">用户名或密码错误</span>
-    </div>
-    <input name="submit" type="submit" value="提交">
-</form>-->
 </body>
 </html>
 

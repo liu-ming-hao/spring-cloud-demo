@@ -38,20 +38,7 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
             HttpServletResponse httpServletResponse,
             Authentication authentication) throws IOException, ServletException {
         if(SecurityEnum.REDIRECT.equals(securityProperties.getAuthentication().getLoginHandlerType())){
-            //重定向到触发认证的请求地址
-            /*RequestCache cache = new HttpSessionRequestCache();
-            SavedRequest savedRequest = cache.getRequest(httpServletRequest, httpServletResponse);
-            // 如果来源请求为空则跳转到用户博客首页
-            String url = "";
-            if((savedRequest==null)){
-                //url = "/blog/"+ SecurityUtil.getLoginUser();
-            }else{
-                url = savedRequest.getRedirectUrl();
-            }
 
-            System.out.println(url);
-
-            httpServletResponse.sendRedirect(url);*/
             super.onAuthenticationSuccess(httpServletRequest,httpServletResponse,authentication);
         }else{
             // 认证成功后，告诉前端,返回响应JSON字符串

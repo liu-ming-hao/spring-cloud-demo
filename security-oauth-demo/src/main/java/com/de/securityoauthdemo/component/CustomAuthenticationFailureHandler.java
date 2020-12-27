@@ -4,6 +4,7 @@ import com.de.publicpackage.result.CodeMsg;
 import com.de.publicpackage.result.Result;
 import com.de.securityoauthdemo.properties.SecurityProperties;
 import com.de.securityoauthdemo.securityenum.SecurityEnum;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -34,7 +35,13 @@ public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationF
             HttpServletResponse httpServletResponse,
             AuthenticationException e) throws IOException, ServletException {
         if(SecurityEnum.REDIRECT.equals(securityProperties.getAuthentication().getLoginHandlerType())){
-            super.setDefaultFailureUrl(securityProperties.getAuthentication().getLoginPage() + "?error");
+            //回到登陆页面
+            //super.setDefaultFailureUrl(securityProperties.getAuthentication().getLoginPage() + "?error");
+            //回到上一页面
+            String referer = httpServletRequest.getHeader("Referer");
+            String lastUrl = StringUtils.substringBefore(referer,"?");
+            super.setDefaultFailureUrl(lastUrl + "?error");
+
             super.onAuthenticationFailure(httpServletRequest,httpServletResponse,e);
         }else{
             Result result = Result.error(new CodeMsg(-1,e.getMessage()));

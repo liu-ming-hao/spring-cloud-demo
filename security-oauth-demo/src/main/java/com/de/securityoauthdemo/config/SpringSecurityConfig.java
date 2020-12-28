@@ -21,6 +21,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.session.InvalidSessionStrategy;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
 import javax.sql.DataSource;
 
@@ -66,6 +67,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     //session失效后的处理
     @Autowired
     private InvalidSessionStrategy invalidSessionStrategy;
+    //同一用户  多设备登录（session过量） 处理
+    @Autowired
+    SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
 
     @Autowired
     DataSource dataSource;
@@ -147,6 +151,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement()//session 管理
                 .invalidSessionStrategy(invalidSessionStrategy) //session失效后的处理
+                .maximumSessions(1) //每个用户在系统中只能有一个session
+                .expiredSessionStrategy(sessionInformationExpiredStrategy) //session 过量  处理
         ;
         //默认都会产生一个hiden标签 里面有安全相关的验证 防止请求伪造 这边我们暂时不需要 可禁用掉
         http .csrf().disable();

@@ -4,10 +4,12 @@ package com.de.securityoauthdemo.config;
 import com.de.securityoauthdemo.mobile.SmsCodeSender;
 import com.de.securityoauthdemo.mobile.SmsSend;
 import com.de.securityoauthdemo.session.CustomInvalidSessionStrategy;
+import com.de.securityoauthdemo.session.CustomSessionInformationExpiredStrategy;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.web.session.InvalidSessionStrategy;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
 /**
  * 主要为容器中添加Bean实例
@@ -37,5 +39,15 @@ public class SecurityConfigBean {
     @ConditionalOnMissingBean(InvalidSessionStrategy.class) //声明 该类型的bean 只能有一个实现
     public InvalidSessionStrategy invalidSessionStrategy(){
         return new CustomInvalidSessionStrategy();
+    }
+
+    /**
+     * CustomSessionInformationExpiredStrategy 加入容器  用户多设备登录处理
+     * @return
+     */
+    @Bean
+    @ConditionalOnMissingBean(SessionInformationExpiredStrategy.class)
+    public SessionInformationExpiredStrategy sessionInformationExpiredStrategy(){
+        return new CustomSessionInformationExpiredStrategy();
     }
 }

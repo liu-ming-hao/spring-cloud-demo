@@ -20,6 +20,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.session.InvalidSessionStrategy;
 
 import javax.sql.DataSource;
 
@@ -62,6 +63,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     //手机号验证组合
     @Autowired
     private MobileAuthenticationConfig mobileAuthenticationConfig;
+    //session失效后的处理
+    @Autowired
+    private InvalidSessionStrategy invalidSessionStrategy;
 
     @Autowired
     DataSource dataSource;
@@ -140,6 +144,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .rememberMe()//配置记住我功能
                 .tokenRepository(jdbcTokenRepository()) //保存登录信息
                 .tokenValiditySeconds(60*60*24)//记住我有效时长
+                .and()
+                .sessionManagement()//session 管理
+                .invalidSessionStrategy(invalidSessionStrategy) //session失效后的处理
         ;
         //默认都会产生一个hiden标签 里面有安全相关的验证 防止请求伪造 这边我们暂时不需要 可禁用掉
         http .csrf().disable();

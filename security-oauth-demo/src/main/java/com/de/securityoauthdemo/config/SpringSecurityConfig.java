@@ -13,12 +13,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
@@ -70,6 +73,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     //同一用户  多设备登录（session过量） 处理
     @Autowired
     SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
+    //退出登录处理
+    @Autowired
+    private LogoutHandler customLogoutHandler;
 
     @Autowired
     DataSource dataSource;
@@ -154,6 +160,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .maximumSessions(1) //每个用户在系统中只能有一个session
                 .expiredSessionStrategy(sessionInformationExpiredStrategy) //用户多设备登录---退出前面的用户
                 .maxSessionsPreventsLogin(true) //用户多设备登录---不允许后面的设备登录  该配置优先级大于上面的 优先级
+                .sessionRegistry(sessionRegistry())
+                .and().and()
+                .logout() //退出登录
+                .addLogoutHandler(customLogoutHandler)
         ;
         //默认都会产生一个hiden标签 里面有安全相关的验证 防止请求伪造 这边我们暂时不需要 可禁用掉
         http .csrf().disable();
@@ -191,5 +201,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         // 是否启动项目时自动创建表，true自动创建  第一次启动后 注释掉
         //jdbcTokenRepository.setCreateTableOnStartup(true);
         return jdbcTokenRepository;
+    }
+
+    /**
+     * 解决退出之后，登录 提示最大登录数
+     */
+    @Bean
+    public SessionRegistry sessionRegistry(){
+        return  new SessionRegistryImpl();
     }
 }

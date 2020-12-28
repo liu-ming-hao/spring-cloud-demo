@@ -159,11 +159,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidSessionStrategy(invalidSessionStrategy) //session失效后的处理
                 .maximumSessions(1) //每个用户在系统中只能有一个session
                 .expiredSessionStrategy(sessionInformationExpiredStrategy) //用户多设备登录---退出前面的用户
-                .maxSessionsPreventsLogin(true) //用户多设备登录---不允许后面的设备登录  该配置优先级大于上面的 优先级
+                //.maxSessionsPreventsLogin(true) //用户多设备登录---不允许后面的设备登录  该配置优先级大于上面的 优先级
                 .sessionRegistry(sessionRegistry())
                 .and().and()
                 .logout() //退出登录
                 .addLogoutHandler(customLogoutHandler)
+                .logoutUrl("/login/logout")//退出请求路径
+                .logoutSuccessUrl("/login/page") //退出成功后跳转地址
+                .deleteCookies("JSESSIONID_CLD")//退出后删除cookie
         ;
         //默认都会产生一个hiden标签 里面有安全相关的验证 防止请求伪造 这边我们暂时不需要 可禁用掉
         http .csrf().disable();

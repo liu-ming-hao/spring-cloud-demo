@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 import org.springframework.stereotype.Component;
 
 /**
@@ -39,6 +40,9 @@ public class MobileAuthenticationConfig extends SecurityConfigurerAdapter<Defaul
         mobileAuthenticationFilter.setRememberMeServices(
                 http.getSharedObject(RememberMeServices.class)
         );
+
+        // session重复登录 管理,解决第一个用户账号密码登录,第二个用手机验证码登录
+        mobileAuthenticationFilter.setSessionAuthenticationStrategy(http.getSharedObject(SessionAuthenticationStrategy.class));
 
         // 传入失败与成功处理器
         mobileAuthenticationFilter.setAuthenticationSuccessHandler(customAuthenticationSuccessHandler);

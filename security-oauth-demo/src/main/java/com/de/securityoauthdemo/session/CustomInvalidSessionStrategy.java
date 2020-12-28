@@ -31,7 +31,7 @@ public class CustomInvalidSessionStrategy  implements InvalidSessionStrategy {
     }
 
     protected void cancelCookie(HttpServletRequest request, HttpServletResponse response) {
-        Cookie cookie = new Cookie("JSESSIONID", null);
+        Cookie cookie = new Cookie("JSESSIONID_CLD", null);
         cookie.setMaxAge(0);
         cookie.setPath(getCookiePath(request));
         response.addCookie(cookie);

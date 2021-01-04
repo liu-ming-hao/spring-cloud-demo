@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.de.userserver.dao.OauthClientDetailsDao">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.de.userserver.model.OauthClientDetails">
+                    <id column="CLIENT_ID" property="clientId" />
+                    <result column="CLIENT_SECRET" property="clientSecret" />
+                    <result column="RESOURCE_IDS" property="resourceIds" />
+                    <result column="SCOPE" property="scope" />
+                    <result column="AUTHORIZED_GRANT_TYPE" property="authorizedGrantType" />
+                    <result column="WEB_SERVER_REDIRECT_URI" property="webServerRedirectUri" />
+                    <result column="AUTHORITIES" property="authorities" />
+                    <result column="ACCESS_TOKEN_VALIDITY" property="accessTokenValidity" />
+                    <result column="REFRESH_TOKEN_VALIDITY" property="refreshTokenValidity" />
+                    <result column="AUTOAPPROVE" property="autoapprove" />
+        </resultMap>
+
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        CLIENT_ID, CLIENT_SECRET, RESOURCE_IDS, SCOPE, AUTHORIZED_GRANT_TYPE, WEB_SERVER_REDIRECT_URI, AUTHORITIES, ACCESS_TOKEN_VALIDITY, REFRESH_TOKEN_VALIDITY, AUTOAPPROVE
+    </sql>
+
+    <!-- 通用查询条件 -->
+    <sql id="dynamicWhere">
+            <where>
+                    <if test="clientId!=null and clientId!=''"> AND CLIENT_ID = #{clientId} </if>
+                    <if test="clientSecret!=null and clientSecret!=''"> AND CLIENT_SECRET = #{clientSecret} </if>
+                    <if test="resourceIds!=null and resourceIds!=''"> AND RESOURCE_IDS = #{resourceIds} </if>
+                    <if test="scope!=null and scope!=''"> AND SCOPE = #{scope} </if>
+                    <if test="authorizedGrantType!=null and authorizedGrantType!=''"> AND AUTHORIZED_GRANT_TYPE = #{authorizedGrantType} </if>
+                    <if test="webServerRedirectUri!=null and webServerRedirectUri!=''"> AND WEB_SERVER_REDIRECT_URI = #{webServerRedirectUri} </if>
+                    <if test="authorities!=null and authorities!=''"> AND AUTHORITIES = #{authorities} </if>
+                    <if test="accessTokenValidity!=null and accessTokenValidity!=''"> AND ACCESS_TOKEN_VALIDITY = #{accessTokenValidity} </if>
+                    <if test="refreshTokenValidity!=null and refreshTokenValidity!=''"> AND REFRESH_TOKEN_VALIDITY = #{refreshTokenValidity} </if>
+                    <if test="autoapprove!=null and autoapprove!=''"> AND AUTOAPPROVE = #{autoapprove} </if>
+            </where>
+    </sql>
+
+    <!-- 通用查询方法
+    <select id="findList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM OAUTH_CLIENT_DETAILS
+        <include refid="dynamicWhere" />
+    </select>
+     -->
+</mapper>

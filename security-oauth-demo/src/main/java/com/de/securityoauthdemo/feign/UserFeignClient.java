@@ -6,6 +6,7 @@ package com.de.securityoauthdemo.feign;
 
 import com.de.publicpackage.result.Result;
 import com.de.securityoauthdemo.module.user.vo.CldUser;
+import com.de.securityoauthdemo.module.user.vo.OauthClientDetails;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,5 +25,13 @@ public interface UserFeignClient {
 
     @PostMapping("/cldUser/selectList")
     public Result<List<CldUser>> selectList(@RequestBody CldUser reqModel);
+
+    /**
+     * oauth2
+     */
+
+    //验证客户端信息
+    @PostMapping("/oauthClientDetails/selectList")
+    public Result<List<OauthClientDetails>> selectList(@RequestBody OauthClientDetails reqModel);
 
 }

@@ -4,6 +4,7 @@ package com.de.securityoauthdemo.feign;
 import com.de.publicpackage.result.CodeMsg;
 import com.de.publicpackage.result.Result;
 import com.de.securityoauthdemo.module.user.vo.CldUser;
+import com.de.securityoauthdemo.module.user.vo.OauthClientDetails;
 import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,11 @@ public class UserFeignClientFallback implements FallbackFactory<UserFeignClient>
 
             @Override
             public Result<List<CldUser>> selectList(CldUser reqModel) {
+                return Result.error(new CodeMsg(-111,"fallback"));
+            }
+
+            @Override
+            public Result<List<OauthClientDetails>> selectList(OauthClientDetails reqModel) {
                 return Result.error(new CodeMsg(-111,"fallback"));
             }
         };
